@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.switchBoard {
+  display: flex;
+  margin: auto;
+  width: 50%;
+}
+
+.switch {
+  padding: 2px;
+  margin-left: auto;
+}
+
+.innerSwitch {
+  width: 20px;
+}

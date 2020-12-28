@@ -1,11 +1,13 @@
 import { Component } from "react";
 import React from 'react'
+import { toggleIndex } from "../switchboard.actions";
 
 class Switch extends Component {
     constructor(props) {
         super(props);
         this.state = {
             on: props.on || false,
+            index: props.index,
             attachedList: props.attachList,
             switchBoard: props.board,
         }
@@ -13,30 +15,16 @@ class Switch extends Component {
     };
 
     toggle = () => {
-        this.state.attachedList.forEach((el) => {
-            // el.toggle();
-            const toggled = this.state.switchBoard.state.listOfSwitches[el].on;
-            console.log('attachedList:', el, toggled);
-            const newListOfSwitches = this.state.switchBoard.state.listOfSwitches;
-            console.log('2: ', newListOfSwitches, newListOfSwitches[el])
-            newListOfSwitches[el].setState({
-                ...newListOfSwitches[el].state,
-                on: !toggled,
-            })
-            this.state.switchBoard.setState({
-                ...this.state.switchBoard.state,
-                newListOfSwitches
-            })
-        });
+        const toggled = toggleIndex(this.state.index);
         this.setState({
-            on: !this.state.on,
+            on: toggled,
         });
     };
 
     render() {
         const { render } = this.props;
         return (
-            <div>
+            <div className={'switch'}>
                 {render({
                     on: this.state.on,
                     toggle: this.toggle,
